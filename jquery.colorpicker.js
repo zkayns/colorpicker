@@ -1258,7 +1258,7 @@
           inputs.s = $('.ui-colorpicker-hsv-s .ui-colorpicker-number', part);
           inputs.v = $('.ui-colorpicker-hsv-v .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
+          $('.ui-colorpicker-number', part).on('input change keyup', function () {
             inst.color.setHSV(
               inputs.h.val() / 360,
               inputs.s.val() / 100,
@@ -1276,7 +1276,7 @@
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(()=>{
+          $('.ui-colorpicker-mode', part).each(function () {
             var $this = $(this);
             $this.prop('checked', $this.val() === inst.mode);
           });
@@ -1318,7 +1318,7 @@
           inputs.g = $('.ui-colorpicker-rgb-g .ui-colorpicker-number', part);
           inputs.b = $('.ui-colorpicker-rgb-b .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
+          $('.ui-colorpicker-number', part).on('input change keyup', function () {
             var r = $('.ui-colorpicker-rgb-r .ui-colorpicker-number', part).val();
             inst.color.setRGB(
               inputs.r.val() / 255,
@@ -1338,7 +1338,7 @@
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(()=>{
+          $('.ui-colorpicker-mode', part).each(function () {
             var $this = $(this);
             $this.prop('checked', $this.val() === inst.mode);
           });
@@ -1354,7 +1354,7 @@
         var that = this,
           part = null,
           inputs = {},
-          html = ()=>{
+          html = function () {
             var html = '';
 
             if (inst.options.hsv) {
@@ -1375,7 +1375,7 @@
           inputs.a = $('.ui-colorpicker-lab-a .ui-colorpicker-number', part);
           inputs.b = $('.ui-colorpicker-lab-b .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', (event)=>{
+          $('.ui-colorpicker-number', part).on('input change keyup', function (event) {
             inst.color.setLAB(
               parseInt(inputs.l.val(), 10) / 100,
               (parseInt(inputs.a.val(), 10) + 128) / 255,
@@ -1403,7 +1403,7 @@
         var that = this,
           part = null,
           inputs = {},
-          html = ()=>{
+          html = function () {
             var html = '';
 
             if (inst.options.hsv) {
@@ -1424,7 +1424,7 @@
           inputs.y = $('.ui-colorpicker-cmyk-y .ui-colorpicker-number', part);
           inputs.k = $('.ui-colorpicker-cmyk-k .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', (event)=>{
+          $('.ui-colorpicker-number', part).on('input change keyup', function (event) {
             inst.color.setCMYK(
               parseInt(inputs.c.val(), 10) / 100,
               parseInt(inputs.m.val(), 10) / 100,
@@ -1454,7 +1454,7 @@
         var that = this,
           part = null,
           input,
-          html = ()=>{
+          html = function () {
             var html = '';
 
             if (inst.options.alpha) {
@@ -1474,14 +1474,14 @@
 
           input = $('.ui-colorpicker-a .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
+          $('.ui-colorpicker-number', part).on('input change keyup', function () {
             inst.color.setAlpha(input.val() / 100);
             inst._change();
           });
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(()=>{
+          $('.ui-colorpicker-mode', part).each(function () {
             $(this).prop('checked', $(this).val() === inst.mode);
           });
           this.repaint();
@@ -1500,7 +1500,7 @@
         var that = this,
           part = null,
           inputs = {},
-          parseHex = (color)=>{
+          parseHex = function(color) {
             var c,
               m;
 
@@ -1546,34 +1546,34 @@
           inputs.color = $('.ui-colorpicker-hex-input', part);
           inputs.alpha = $('.ui-colorpicker-hex-alpha', part);
 
-          inputs.color.on('keydown keyup', (e)=>{
+          inputs.color.on('keydown keyup', function(e) {
             return e.ctrlKey || e.metaKey || _keycode.isHex(e.which) || !_keycode.isPrint(e.which);
           });
 
           // repeat here makes the invalid input disappear faster
-          inputs.color.on('change', ()=>{
+          inputs.color.on('change', function () {
             if (/[^a-fA-F0-9]/.test(inputs.color.val())) {
               inputs.color.val(inputs.color.val().replace(/[^a-fA-F0-9]/g, ''));
             }
           });
 
-          inputs.color.on('change keyup', ()=>{
+          inputs.color.on('change keyup', function () {
             // repeat here makes sure that the invalid input doesn't get parsed
             inst.color = parseHex(inputs.color.val()).setAlpha(inst.color.getAlpha());
             inst._change();
           });
 
-          inputs.alpha.on('keydown keyup', (e)=>{
+          inputs.alpha.on('keydown keyup', function(e) {
             return e.ctrlKey || e.metaKey || _keycode.isHex(e.which) || !_keycode.isPrint(e.which);
           });
 
-          inputs.alpha.on('change', ()=>{
+          inputs.alpha.on('change', function () {
             if (/[^a-fA-F0-9]/.test(inputs.alpha)) {
               inputs.alpha.val(inputs.alpha.val().replace(/[^a-fA-F0-9]/g, ''));
             }
           });
 
-          inputs.alpha.on('change keyup', ()=>{
+          inputs.alpha.on('change keyup', function () {
             inst.color.setAlpha(parseInt(inputs.alpha.val(), 16) / 255);
             inst._change();
           });
@@ -1599,7 +1599,7 @@
       swatches: function (inst) {
         var that = this,
           part = null,
-          html = ()=>{
+          html = function () {
             var html = '';
 
             inst._eachSwatch(function (name, color) {
@@ -1631,7 +1631,7 @@
           part = null,
           id_transparent = `ui-colorpicker-special-transparent-${inst.colorpicker_index}`,
           id_none = `ui-colorpicker-special-none-${inst.colorpicker_index}`,
-          html = ()=>{
+          html = function () {
             var html = '';
 
             if (inst.options.alpha || (!inst.inline && inst.options.showNoneButton)) {
@@ -1713,7 +1713,7 @@
         a = 1,
         illuminant = [0.9504285, 1, 1.0889],	// CIE-L*ab D65/2' 1931
         args = arguments,
-        _clip = (v)=>{
+        _clip = function(v) {
           if (isNaN(v) || v === null) {
             return 0;
           }
@@ -1722,7 +1722,7 @@
           }
           return Math.max(0, Math.min(v, 1));
         },
-        _hexify = (number)=>{
+        _hexify = function (number) {
           var number = Math.round(number),
             digits = '0123456789abcdef',
             lsd = number % 16,
@@ -1730,7 +1730,7 @@
             hexified = digits.charAt(msd) + digits.charAt(lsd);
           return hexified;
         },
-        _rgb_to_xyz = (rgb)=>{
+        _rgb_to_xyz = function(rgb) {
           var r = (rgb.r > 0.04045) ? Math.pow((rgb.r + 0.055) / 1.055, 2.4) : rgb.r / 12.92,
             g = (rgb.g > 0.04045) ? Math.pow((rgb.g + 0.055) / 1.055, 2.4) : rgb.g / 12.92,
             b = (rgb.b > 0.04045) ? Math.pow((rgb.b + 0.055) / 1.055, 2.4) : rgb.b / 12.92;
@@ -1741,7 +1741,7 @@
             z: r * 0.0193 + g * 0.1192 + b * 0.9505
           };
         },
-        _xyz_to_rgb = (xyz)=>{
+        _xyz_to_rgb = function(xyz) {
           var rgb = {
             r: xyz.x *  3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986,
             g: xyz.x * -0.9689 + xyz.y *  1.8758 + xyz.z *  0.0415,
@@ -1754,7 +1754,7 @@
 
           return rgb;
         },
-        _rgb_to_hsv = (rgb)=>{
+        _rgb_to_hsv = function(rgb) {
           var minVal = Math.min(rgb.r, rgb.g, rgb.b),
             maxVal = Math.max(rgb.r, rgb.g, rgb.b),
             delta = maxVal - minVal,
@@ -1792,7 +1792,7 @@
 
           return hsv;
         },
-        _hsv_to_rgb = (hsv)=>{
+        _hsv_to_rgb = function(hsv) {
           var rgb = {
               r: 0,
               g: 0,
@@ -1842,7 +1842,7 @@
 
           return rgb;
         },
-        _rgb_to_hsl = (rgb)=>{
+        _rgb_to_hsl = function(rgb) {
           var minVal = Math.min(rgb.r, rgb.g, rgb.b),
             maxVal = Math.max(rgb.r, rgb.g, rgb.b),
             delta = maxVal - minVal,
@@ -1880,10 +1880,10 @@
 
           return hsl;
         },
-        _hsl_to_rgb = (hsl)=>{
+        _hsl_to_rgb = function(hsl) {
           var var_1,
             var_2,
-            hue_to_rgb	= (v1, v2, vH)=>{
+            hue_to_rgb	= function(v1, v2, vH) {
               if (vH < 0) {
                 vH += 1;
               }
@@ -1919,7 +1919,7 @@
             b: hue_to_rgb(var_1, var_2, hsl.h - (1 / 3))
           };
         },
-        _xyz_to_lab = (xyz)=>{
+        _xyz_to_lab = function(xyz) {
           var x = xyz.x / illuminant[0],
             y = xyz.y / illuminant[1],
             z = xyz.z / illuminant[2];
@@ -1934,7 +1934,7 @@
             b: ((200 * (y - z))	+ 128) / 255	// [-128,127]
           };
         },
-        _lab_to_xyz = (lab)=>{
+        _lab_to_xyz = function(lab) {
           var lab2 = {
               l: lab.l * 100,
               a: (lab.a * 255) - 128,
@@ -1959,21 +1959,21 @@
 
           return xyz;
         },
-        _rgb_to_cmy = (rgb)=>{
+        _rgb_to_cmy = function(rgb) {
           return {
             c: 1 - (rgb.r),
             m: 1 - (rgb.g),
             y: 1 - (rgb.b)
           };
         },
-        _cmy_to_rgb = (cmy)=>{
+        _cmy_to_rgb = function(cmy) {
           return {
             r: 1 - (cmy.c),
             g: 1 - (cmy.m),
             b: 1 - (cmy.y)
           };
         },
-        _cmy_to_cmyk = (cmy)=>{
+        _cmy_to_cmyk = function(cmy) {
           var K = 1;
 
           if (cmy.c < K) {
@@ -2002,7 +2002,7 @@
             k: K
           };
         },
-        _cmyk_to_cmy = (cmyk)=>{
+        _cmyk_to_cmy = function(cmyk) {
           return {
             c: cmyk.c * (1 - cmyk.k) + cmyk.k,
             m: cmyk.m * (1 - cmyk.k) + cmyk.k,
@@ -2012,7 +2012,7 @@
 
       this.set = false;
 
-      this.setAlpha = (_a)=>{
+      this.setAlpha = function(_a) {
         if (_a !== null) {
           a = _clip(_a);
         }
@@ -2021,11 +2021,11 @@
         return this;
       };
 
-      this.getAlpha = ()=>{
+      this.getAlpha = function() {
         return a;
       };
 
-      this.setRGB = (r, g, b)=>{
+      this.setRGB = function(r, g, b) {
         spaces = { rgb: this.getRGB() };
         if (r !== null) {
           spaces.rgb.r = _clip(r);
@@ -2041,7 +2041,7 @@
         return this;
       };
 
-      this.getChannel = (channel)=>{
+      this.getChannel = function(channel) {
         switch (channel) {
         case 'h':
         case 's':
@@ -2060,7 +2060,7 @@
         return null;
       };
 
-      this.setChannel = (channel, value)=>{
+      this.setChannel = function(channel, value) {
         switch (channel) {
         case 'h':
           return this.setHSV(value, null, null);
@@ -2087,7 +2087,7 @@
         return this;
       };
 
-      this.setHSV = (h, s, v)=>{
+      this.setHSV = function(h, s, v) {
         spaces = {hsv: this.getHSV()};
         if (h !== null) {
           spaces.hsv.h = _clip(h);

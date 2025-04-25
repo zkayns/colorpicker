@@ -135,7 +135,7 @@
             }
 
             if (colspan > 0) {
-              html += `<td colspan="${colspan}"></td>`;
+              html += '<td colspan="'+colspan+'"></td>';
             } else if (!walked) {
               x += 1;
             }
@@ -1199,7 +1199,7 @@
           // cache
           initial = $('.ui-colorpicker-preview-initial', part);
           initial_alpha = $('.ui-colorpicker-preview-initial-alpha', part);
-          current = $('.ui-colorpicker-preview-current', part);
+          current  = $('.ui-colorpicker-preview-current', part);
           current_alpha = $('.ui-colorpicker-preview-current-alpha', part);
           both = $('.ui-colorpicker-preview-initial-alpha, .ui-colorpicker-preview-current-alpha', part);
         };
@@ -1249,7 +1249,7 @@
         this.init = function () {
           part = $(_html()).appendTo($('.ui-colorpicker-hsv-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).on("click", ()=>{
+          $('.ui-colorpicker-mode', part).on("click", function () {
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1309,7 +1309,7 @@
         this.init = function () {
           part = $(_html()).appendTo($('.ui-colorpicker-rgb-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).on("click", ()=>{
+          $('.ui-colorpicker-mode', part).on("click", function () {
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1467,7 +1467,7 @@
         this.init = function () {
           part = $(html()).appendTo($('.ui-colorpicker-alpha-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).on("click", ()=>{
+          $('.ui-colorpicker-mode', part).on("click", function () {
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1605,7 +1605,7 @@
             inst._eachSwatch(function (name, color) {
               var c = new $.colorpicker.Color(color.r, color.g, color.b),
                 css = c.toCSS();
-              html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name} (${css})"></div>`;
+              html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name}"></div>`;
             });
 
             return `<div class="ui-colorpicker-swatches ui-colorpicker-border" style="width:${inst.options.swatchesWidth}px">${html}</div>`;
@@ -1661,28 +1661,28 @@
         this.init = function () {
           part = $(html()).appendTo(inst.dialog);
 
-          $('.ui-colorpicker-ok', part).button().on("click", ()=>{
+          $('.ui-colorpicker-ok', part).button().on("click", function () {
             inst.close();
           });
 
-          $('.ui-colorpicker-cancel', part).button().on("click", ()=>{
+          $('.ui-colorpicker-cancel', part).button().on("click", function () {
             inst.close(true);   //cancel
           });
 
           $('.ui-colorpicker-buttonset', part)[$.fn.controlgroup ? 'controlgroup' : 'buttonset']();
 
-          $('.ui-colorpicker-special-color', part).on("click", ()=>{
+          $('.ui-colorpicker-special-color', part).on("click", function () {
             inst._change();
           });
 
-          $('#'+id_none, part).on("click", ()=>{
+          $('#'+id_none, part).on("click", function () {
             inst.color.set = false;
             inst._change();
           });
 
-          $('#'+id_transparent, part).on("click", ()=>{
-              inst.color.setAlpha(0);
-              inst._change();
+          $('#'+id_transparent, part).on("click", function () {
+            inst.color.setAlpha(0);
+            inst._change();
           });
         };
 
@@ -2464,7 +2464,7 @@
             that.button = $('<button type="button"></button>').html(that.image || that.options.buttonText).button();
             that.image = that.image ? $('img', that.button).first() : null;
           }
-          that.button.insertAfter(that.element).on("click", ()=>{
+          that.button.insertAfter(that.element).on("click", function () {
             if (!that.options.disabled) {
               if (that.opened && /\bbutton|all|both\b/.test(that.options.hideOn)) {
                 that.close();

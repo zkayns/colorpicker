@@ -1681,15 +1681,8 @@
           });
 
           $('#'+id_transparent, part).click(function () {
-            switch (inst.color.getAlpha()) {
-                case 0:
-                  inst.color.setAlpha(100);
-                  inst._change();
-                  break;
-                default:
-                  inst.color.setAlpha(0);
-                  inst._change();
-            }
+              inst.color.setAlpha(inst.color.getAlpha() ? 0 : 100);
+              inst._change();
           });
         };
 

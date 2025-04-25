@@ -1249,7 +1249,7 @@
         this.init = function () {
           part = $(_html()).appendTo($('.ui-colorpicker-hsv-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).click(function () {
+          $('.ui-colorpicker-mode', part).on("click", ()=>{
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1309,7 +1309,7 @@
         this.init = function () {
           part = $(_html()).appendTo($('.ui-colorpicker-rgb-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).click(function () {
+          $('.ui-colorpicker-mode', part).on("click", ()=>{
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1467,7 +1467,7 @@
         this.init = function () {
           part = $(html()).appendTo($('.ui-colorpicker-alpha-container', inst.dialog));
 
-          $('.ui-colorpicker-mode', part).click(function () {
+          $('.ui-colorpicker-mode', part).on("click", ()=>{
             inst.mode = $(this).val();
             inst._updateAllParts();
           });
@@ -1661,27 +1661,27 @@
         this.init = function () {
           part = $(html()).appendTo(inst.dialog);
 
-          $('.ui-colorpicker-ok', part).button().click(function () {
+          $('.ui-colorpicker-ok', part).button().on("click", ()=>{
             inst.close();
           });
 
-          $('.ui-colorpicker-cancel', part).button().click(function () {
+          $('.ui-colorpicker-cancel', part).button().on("click", ()=>{
             inst.close(true);   //cancel
           });
 
           $('.ui-colorpicker-buttonset', part)[$.fn.controlgroup ? 'controlgroup' : 'buttonset']();
 
-          $('.ui-colorpicker-special-color', part).click(function () {
+          $('.ui-colorpicker-special-color', part).on("click", ()=>{
             inst._change();
           });
 
-          $('#'+id_none, part).click(function () {
+          $('#'+id_none, part).on("click", ()=>{
             inst.color.set = false;
             inst._change();
           });
 
-          $('#'+id_transparent, part).click(function () {
-              inst.color.setAlpha(inst.color.getAlpha() ? 0 : 100);
+          $('#'+id_transparent, part).on("click", ()=>{
+              inst.color.setAlpha(0);
               inst._change();
           });
         };
@@ -2464,7 +2464,7 @@
             that.button = $('<button type="button"></button>').html(that.image || that.options.buttonText).button();
             that.image = that.image ? $('img', that.button).first() : null;
           }
-          that.button.insertAfter(that.element).click(function () {
+          that.button.insertAfter(that.element).on("click", ()=>{
             if (!that.options.disabled) {
               if (that.opened && /\bbutton|all|both\b/.test(that.options.hideOn)) {
                 that.close();

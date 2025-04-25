@@ -35,7 +35,7 @@
     _intToHex = function (dec) {
       var result = Math.round(dec).toString(16);
       if (result.length === 1) {
-        result = ('0' + result);
+        result = (`0${result}`);
       }
       return result.toLowerCase();
     },
@@ -144,7 +144,7 @@
         html += '</tr>';
       }
 
-      return '<table cellspacing="0" cellpadding="0" border="0"><tbody>' + html + '</tbody></table>';
+      return `<table cellspacing="0" cellpadding="0" border="0"><tbody>${html}</tbody></table>`;
     };
 
   $.colorpicker = new function() {
@@ -345,7 +345,7 @@
         if (((r >>> 4) === (r &= 0xf))
                && ((g >>> 4) === (g &= 0xf))
                && ((b >>> 4) === (b &= 0xf))) {
-          return r.toString(16)+g.toString(16)+b.toString(16);
+          return `${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
         }
         return false;
       }
@@ -354,7 +354,7 @@
       }
       , '#HEXA4': function(color, that) {
         var hexa4 = $.colorpicker.writers.HEXA4(color, that);
-        return hexa4 === false? false : '#'+hexa4;
+        return hexa4 === false? false : `#${hexa4}`;
       }
       , 'HEXA': function(color, that) {
         return that._formatColor('rxgxbxax', color);
@@ -363,7 +363,7 @@
         var a = Math.round(color.getAlpha() * 255);
 
         if ((a >>> 4) === (a &= 0xf)) {
-          return $.colorpicker.writers.HEX3(color, that)+a.toString(16);
+          return `${$.colorpicker.writers.HEX3(color, that)}${a.toString(16)}`;
         }
         return false;
       }
@@ -574,14 +574,14 @@
           part = null,
           _html  = function() {
             var title = inst.options.title || inst._getRegional('title'),
-              html = '<span class="ui-dialog-title">' + title + '</span>';
+              html = `<span class="ui-dialog-title">${title}</span>`;
 
             if (!inst.inline && inst.options.showCloseButton) {
               html += '<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">'
                 + '<span class="ui-icon ui-icon-closethick">close</span></a>';
             }
 
-            return '<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">' + html + '</div>';
+            return `<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">${html}</div>`;
           },
           _onclick = function(event) {
             event.preventDefault();
@@ -756,7 +756,7 @@
         };
 
         _html = function () {
-          var html = '<div class="ui-colorpicker-map ui-colorpicker-map-'+(inst.options.part.map.size || 256)+' ui-colorpicker-border" taonex="0">'
+          var html = `<div class="ui-colorpicker-map ui-colorpicker-map-${(inst.options.part.map.size || 256)} ui-colorpicker-border" taonex="0">`
             + '<span class="ui-colorpicker-map-layer-1">&nbsp;</span>'
             + '<span class="ui-colorpicker-map-layer-2">&nbsp;</span>'
             + (inst.options.alpha ? '<span class="ui-colorpicker-map-layer-alpha">&nbsp;</span>' : '')
@@ -792,29 +792,29 @@
 
           case 's':
           case 'a':
-            layers[1].css({'background-position': '0 ' + (-step) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 2) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 2)}px`, 'opacity': ''}).show();
             break;
 
           case 'v':
             part.css('background-color', 'black');
-            layers[1].css({'background-position': '0 ' + (-step * 3) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 3)}px`, 'opacity': ''}).show();
             layers[2].hide();
             break;
 
           case 'r':
-            layers[1].css({'background-position': '0 ' + (-step * 4) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 5) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 4)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 5)}px`, 'opacity': ''}).show();
             break;
 
           case 'g':
-            layers[1].css({'background-position': '0 ' + (-step * 6) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 7) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 6)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 7)}px`, 'opacity': ''}).show();
             break;
 
           case 'b':
-            layers[1].css({'background-position': '0 ' + (-step * 8) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 9) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 8)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 9)}px`, 'opacity': ''}).show();
             break;
           }
 
@@ -999,7 +999,7 @@
         };
 
         _html = function () {
-          var html = '<div class="ui-colorpicker-bar ui-colorpicker-bar-'+(inst.options.part.bar.size || 256)+'  ui-colorpicker-border" taonex="0">'
+          var html = `<div class="ui-colorpicker-bar ui-colorpicker-bar-${(inst.options.part.bar.size || 256)}  ui-colorpicker-border" taonex="0">`
             + '<span class="ui-colorpicker-bar-layer-1">&nbsp;</span>'
             + '<span class="ui-colorpicker-bar-layer-2">&nbsp;</span>'
             + '<span class="ui-colorpicker-bar-layer-3">&nbsp;</span>'
@@ -1064,38 +1064,38 @@
             break;
 
           case 's':
-            layers[1].css({'background-position': '0 ' + (-step) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 2) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 2)}px`, 'opacity': ''}).show();
             layers[3].hide();
             layers[4].hide();
             break;
 
           case 'v':
-            layers[1].css({'background-position': '0 ' + (-step * 2) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 2)}px`, 'opacity': ''}).show();
             layers[2].hide();
             layers[3].hide();
             layers[4].hide();
             break;
 
           case 'r':
-            layers[1].css({'background-position': '0 ' + (-step * 6) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 5) + 'px', 'opacity': ''}).show();
-            layers[3].css({'background-position': '0 ' + (-step * 3) + 'px', 'opacity': ''}).show();
-            layers[4].css({'background-position': '0 ' + (-step * 4) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 6)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 5)}px`, 'opacity': ''}).show();
+            layers[3].css({'background-position': `0 ${(-step * 3)}px`, 'opacity': ''}).show();
+            layers[4].css({'background-position': `0 ${(-step * 4)}px`, 'opacity': ''}).show();
             break;
 
           case 'g':
-            layers[1].css({'background-position': '0 ' + (-step * 10) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 9) + 'px', 'opacity': ''}).show();
-            layers[3].css({'background-position': '0 ' + (-step * 7) + 'px', 'opacity': ''}).show();
-            layers[4].css({'background-position': '0 ' + (-step * 8) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 10)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 9)}px`, 'opacity': ''}).show();
+            layers[3].css({'background-position': `0 ${(-step * 7)}px`, 'opacity': ''}).show();
+            layers[4].css({'background-position': `0 ${(-step * 8)}px`, 'opacity': ''}).show();
             break;
 
           case 'b':
-            layers[1].css({'background-position': '0 ' + (-step * 14) + 'px', 'opacity': ''}).show();
-            layers[2].css({'background-position': '0 ' + (-step * 13) + 'px', 'opacity': ''}).show();
-            layers[3].css({'background-position': '0 ' + (-step * 11) + 'px', 'opacity': ''}).show();
-            layers[4].css({'background-position': '0 ' + (-step * 12) + 'px', 'opacity': ''}).show();
+            layers[1].css({'background-position': `0 ${(-step * 14)}px`, 'opacity': ''}).show();
+            layers[2].css({'background-position': `0 ${(-step * 13)}px`, 'opacity': ''}).show();
+            layers[3].css({'background-position': `0 ${(-step * 11)}px`, 'opacity': ''}).show();
+            layers[4].css({'background-position': `0 ${(-step * 12)}px`, 'opacity': ''}).show();
             break;
 
           case 'a':
@@ -1243,7 +1243,7 @@
               + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100" size="10"/><span class="ui-colorpicker-unit">%</span></div>';
           }
 
-          return '<div class="ui-colorpicker-hsv">' + html + '</div>';
+          return `<div class="ui-colorpicker-hsv">${html}</div>`;
         };
 
         this.init = function () {
@@ -1298,12 +1298,12 @@
           var html = '';
 
           if (inst.options.rgb) {
-            html += '<div class="ui-colorpicker-rgb-r"><input class="ui-colorpicker-mode" type="radio" value="r"/><label>' + inst._getRegional('rgbR') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>'
-              + '<div class="ui-colorpicker-rgb-g"><input class="ui-colorpicker-mode" type="radio" value="g"/><label>' + inst._getRegional('rgbG') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>'
-              + '<div class="ui-colorpicker-rgb-b"><input class="ui-colorpicker-mode" type="radio" value="b"/><label>' + inst._getRegional('rgbB') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>';
+            html += `<div class="ui-colorpicker-rgb-r"><input class="ui-colorpicker-mode" type="radio" value="r"/><label>${inst._getRegional('rgbR')}</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>`
+              + `<div class="ui-colorpicker-rgb-g"><input class="ui-colorpicker-mode" type="radio" value="g"/><label>${inst._getRegional('rgbG')}</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>`
+              + `<div class="ui-colorpicker-rgb-b"><input class="ui-colorpicker-mode" type="radio" value="b"/><label>${inst._getRegional('rgbB')}</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>`;
           }
 
-          return '<div class="ui-colorpicker-rgb">' + html + '</div>';
+          return `<div class="ui-colorpicker-rgb">${html}</div>`;
         };
 
         this.init = function () {
@@ -1358,12 +1358,12 @@
             var html = '';
 
             if (inst.options.hsv) {
-              html += '<div class="ui-colorpicker-lab-l"><label>' + inst._getRegional('labL') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/></div>'
-                + '<div class="ui-colorpicker-lab-a"><label>' + inst._getRegional('labA') + '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>'
-                + '<div class="ui-colorpicker-lab-b"><label>' + inst._getRegional('labB') + '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>';
+              html += `<div class="ui-colorpicker-lab-l"><label>${inst._getRegional('labL')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/></div>`
+                + `<div class="ui-colorpicker-lab-a"><label>${inst._getRegional('labA')}</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>`
+                + `<div class="ui-colorpicker-lab-b"><label>${inst._getRegional('labB')}</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>`;
             }
 
-            return '<div class="ui-colorpicker-lab">' + html + '</div>';
+            return `<div class="ui-colorpicker-lab">${html}</div>`;
           };
 
         this.init = function () {
@@ -1407,13 +1407,13 @@
             var html = '';
 
             if (inst.options.hsv) {
-              html += '<div class="ui-colorpicker-cmyk-c"><label>' + inst._getRegional('cmykC') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-m"><label>' + inst._getRegional('cmykM') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-y"><label>' + inst._getRegional('cmykY') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-k"><label>' + inst._getRegional('cmykK') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>';
+              html += `<div class="ui-colorpicker-cmyk-c"><label>${inst._getRegional('cmykC')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>`
+                + `<div class="ui-colorpicker-cmyk-m"><label>${inst._getRegional('cmykM')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>`
+                + `<div class="ui-colorpicker-cmyk-y"><label>${inst._getRegional('cmykY')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>`
+                + `<div class="ui-colorpicker-cmyk-k"><label>${inst._getRegional('cmykK')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>`;
             }
 
-            return '<div class="ui-colorpicker-cmyk">' + html + '</div>';
+            return `<div class="ui-colorpicker-cmyk">${html}</div>`;
           };
 
         this.init = function () {
@@ -1458,10 +1458,10 @@
             var html = '';
 
             if (inst.options.alpha) {
-              html += '<div class="ui-colorpicker-a"><input class="ui-colorpicker-mode" name="mode" type="radio" value="a"/><label>' + inst._getRegional('alphaA') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>';
+              html += `<div class="ui-colorpicker-a"><input class="ui-colorpicker-mode" name="mode" type="radio" value="a"/><label>${inst._getRegional('alphaA')}</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>`;
             }
 
-            return '<div class="ui-colorpicker-alpha">' + html + '</div>';
+            return `<div class="ui-colorpicker-alpha">${html}</div>`;
           };
 
         this.init = function () {
@@ -1537,7 +1537,7 @@
 
             html += '<input class="ui-colorpicker-hex-input" type="text" maxlength="6" size="6"/>';
 
-            return '<div class="ui-colorpicker-hex"><label>#</label>' + html + '</div>';
+            return `<div class="ui-colorpicker-hex"><label>#</label>${html}</div>`;
           };
 
         this.init = function () {
@@ -1605,10 +1605,10 @@
             inst._eachSwatch(function (name, color) {
               var c = new $.colorpicker.Color(color.r, color.g, color.b),
                 css = c.toCSS();
-              html += '<div class="ui-colorpicker-swatch" style="background-color:' + css + '" title="' + name + '"></div>';
+              html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name}"></div>`;
             });
 
-            return '<div class="ui-colorpicker-swatches ui-colorpicker-border" style="width:' + inst.options.swatchesWidth + 'px">' + html + '</div>';
+            return `<div class="ui-colorpicker-swatches ui-colorpicker-border" style="width:${inst.options.swatchesWidth}px">${html}</div>`;
           },
           onclick = function () {
             inst.color	= inst._parseColor($(this).css('background-color')) || new $.colorpicker.Color();
@@ -1629,8 +1629,8 @@
       footer: function (inst) {
         var that = this,
           part = null,
-          id_transparent = 'ui-colorpicker-special-transparent-' + inst.colorpicker_index,
-          id_none = 'ui-colorpicker-special-none-' + inst.colorpicker_index,
+          id_transparent = `ui-colorpicker-special-transparent-${inst.colorpicker_index}`,
+          id_none = `ui-colorpicker-special-none-${inst.colorpicker_index}`,
           html = function () {
             var html = '';
 
@@ -1638,10 +1638,10 @@
               html += '<div class="ui-colorpicker-buttonset">';
 
               if (inst.options.alpha) {
-                html += '<input type="radio" name="ui-colorpicker-special" id="'+id_transparent+'" class="ui-colorpicker-special-transparent"/><label for="'+id_transparent+'">' + inst._getRegional('transparent') + '</label>';
+                html += `<input type="radio" name="ui-colorpicker-special" id="${id_transparent}" class="ui-colorpicker-special-transparent"/><label for="${id_transparent}">${inst._getRegional('transparent')}</label>`;
               }
               if (!inst.inline && inst.options.showNoneButton) {
-                html += '<input type="radio" name="ui-colorpicker-special" id="'+id_none+'" class="ui-colorpicker-special-none"><label for="'+id_none+'">' + inst._getRegional('none') + '</label>';
+                html += `<input type="radio" name="ui-colorpicker-special" id="${id_none}" class="ui-colorpicker-special-none"><label for="${id_none}">${inst._getRegional('none')}</label>`;
               }
               html += '</div>';
             }
@@ -1649,13 +1649,13 @@
             if (!inst.inline) {
               html += '<div class="ui-dialog-buttonset">';
               if (inst.options.showCancelButton) {
-                html += '<button class="ui-colorpicker-cancel">' + inst._getRegional('cancel') + '</button>';
+                html += `<button class="ui-colorpicker-cancel">${inst._getRegional('cancel')}</button>`;
               }
-              html += '<button class="ui-colorpicker-ok">' + inst._getRegional('ok') + '</button>';
+              html += `<button class="ui-colorpicker-ok">${inst._getRegional('ok')}</button>`;
               html += '</div>';
             }
 
-            return '<div class="ui-dialog-buttonpane ui-widget-content">' + html + '</div>';
+            return `<div class="ui-dialog-buttonpane ui-widget-content">${html}</div>`;
           };
 
         this.init = function () {
@@ -2293,7 +2293,7 @@
       };
 
       this.toCSS = function() {
-        return '#' + this.toHex();
+        return `#${this.toHex()}`;
       };
 
       this.copy = function() {
@@ -2728,7 +2728,7 @@
         });
 
         table = $(_layoutTable(layout_parts, function(cell, x, y) {
-          classes = ['ui-colorpicker-' + cell.part + '-container'];
+          classes = [`ui-colorpicker-${cell.part}-container`];
 
           if (x > 0) {
             classes.push('ui-colorpicker-padding-left');
@@ -2738,10 +2738,7 @@
             classes.push('ui-colorpicker-padding-top');
           }
 
-          return '<td  class="' + classes.join(' ') + '"'
-            + (cell.pos[2] > 1 ? ' colspan="' + cell.pos[2] + '"' : '')
-            + (cell.pos[3] > 1 ? ' rowspan="' + cell.pos[3] + '"' : '')
-            + ' valign="top"></td>';
+          return `<td  class="${classes.join(' ')}"${(cell.pos[2] > 1 ? ` colspan="${cell.pos[2]}"` : '')}${(cell.pos[3] > 1 ? ` rowspan="${cell.pos[3]}"` : '')} valign="top"></td>`;
         })).appendTo(that.dialog);
         if (that.options.inlineFrame) {
           table.addClass('ui-dialog-content ui-widget-content');

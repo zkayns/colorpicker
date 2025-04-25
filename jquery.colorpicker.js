@@ -1681,8 +1681,13 @@
           });
 
           $('#'+id_transparent, part).click(function () {
-            inst.color.setAlpha(0);
-            inst._change();
+            switch (inst.color.getAlpha()):
+                case 0:
+                  break;
+                default:
+                  inst.color.setAlpha(0);
+                  inst._change();
+                break;
           });
         };
 

@@ -135,7 +135,7 @@
             }
 
             if (colspan > 0) {
-              html += '<td colspan="'+colspan+'"></td>';
+              html += `<td colspan="${colspan}"></td>`;
             } else if (!walked) {
               x += 1;
             }
@@ -1199,7 +1199,7 @@
           // cache
           initial = $('.ui-colorpicker-preview-initial', part);
           initial_alpha = $('.ui-colorpicker-preview-initial-alpha', part);
-          current  = $('.ui-colorpicker-preview-current', part);
+          current = $('.ui-colorpicker-preview-current', part);
           current_alpha = $('.ui-colorpicker-preview-current-alpha', part);
           both = $('.ui-colorpicker-preview-initial-alpha, .ui-colorpicker-preview-current-alpha', part);
         };

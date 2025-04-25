@@ -1258,7 +1258,7 @@
           inputs.s = $('.ui-colorpicker-hsv-s .ui-colorpicker-number', part);
           inputs.v = $('.ui-colorpicker-hsv-v .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', function () {
+          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
             inst.color.setHSV(
               inputs.h.val() / 360,
               inputs.s.val() / 100,
@@ -1276,7 +1276,7 @@
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(function () {
+          $('.ui-colorpicker-mode', part).each(()=>{
             var $this = $(this);
             $this.prop('checked', $this.val() === inst.mode);
           });
@@ -1318,7 +1318,7 @@
           inputs.g = $('.ui-colorpicker-rgb-g .ui-colorpicker-number', part);
           inputs.b = $('.ui-colorpicker-rgb-b .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', function () {
+          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
             var r = $('.ui-colorpicker-rgb-r .ui-colorpicker-number', part).val();
             inst.color.setRGB(
               inputs.r.val() / 255,
@@ -1338,7 +1338,7 @@
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(function () {
+          $('.ui-colorpicker-mode', part).each(()=>{
             var $this = $(this);
             $this.prop('checked', $this.val() === inst.mode);
           });
@@ -1375,7 +1375,7 @@
           inputs.a = $('.ui-colorpicker-lab-a .ui-colorpicker-number', part);
           inputs.b = $('.ui-colorpicker-lab-b .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', function (event) {
+          $('.ui-colorpicker-number', part).on('input change keyup', (event)=>{
             inst.color.setLAB(
               parseInt(inputs.l.val(), 10) / 100,
               (parseInt(inputs.a.val(), 10) + 128) / 255,
@@ -1424,7 +1424,7 @@
           inputs.y = $('.ui-colorpicker-cmyk-y .ui-colorpicker-number', part);
           inputs.k = $('.ui-colorpicker-cmyk-k .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', function (event) {
+          $('.ui-colorpicker-number', part).on('input change keyup', (event)=>{
             inst.color.setCMYK(
               parseInt(inputs.c.val(), 10) / 100,
               parseInt(inputs.m.val(), 10) / 100,
@@ -1474,14 +1474,14 @@
 
           input = $('.ui-colorpicker-a .ui-colorpicker-number', part);
 
-          $('.ui-colorpicker-number', part).on('input change keyup', function () {
+          $('.ui-colorpicker-number', part).on('input change keyup', ()=>{
             inst.color.setAlpha(input.val() / 100);
             inst._change();
           });
         };
 
         this.update = function () {
-          $('.ui-colorpicker-mode', part).each(function () {
+          $('.ui-colorpicker-mode', part).each(()=>{
             $(this).prop('checked', $(this).val() === inst.mode);
           });
           this.repaint();
@@ -1546,34 +1546,34 @@
           inputs.color = $('.ui-colorpicker-hex-input', part);
           inputs.alpha = $('.ui-colorpicker-hex-alpha', part);
 
-          inputs.color.on('keydown keyup', function(e) {
+          inputs.color.on('keydown keyup', (e)=>{
             return e.ctrlKey || e.metaKey || _keycode.isHex(e.which) || !_keycode.isPrint(e.which);
           });
 
           // repeat here makes the invalid input disappear faster
-          inputs.color.on('change', function () {
+          inputs.color.on('change', ()=>{
             if (/[^a-fA-F0-9]/.test(inputs.color.val())) {
               inputs.color.val(inputs.color.val().replace(/[^a-fA-F0-9]/g, ''));
             }
           });
 
-          inputs.color.on('change keyup', function () {
+          inputs.color.on('change keyup', ()=>{
             // repeat here makes sure that the invalid input doesn't get parsed
             inst.color = parseHex(inputs.color.val()).setAlpha(inst.color.getAlpha());
             inst._change();
           });
 
-          inputs.alpha.on('keydown keyup', function(e) {
+          inputs.alpha.on('keydown keyup', (e)=>{
             return e.ctrlKey || e.metaKey || _keycode.isHex(e.which) || !_keycode.isPrint(e.which);
           });
 
-          inputs.alpha.on('change', function () {
+          inputs.alpha.on('change', ()=>{
             if (/[^a-fA-F0-9]/.test(inputs.alpha)) {
               inputs.alpha.val(inputs.alpha.val().replace(/[^a-fA-F0-9]/g, ''));
             }
           });
 
-          inputs.alpha.on('change keyup', function () {
+          inputs.alpha.on('change keyup', ()=>{
             inst.color.setAlpha(parseInt(inputs.alpha.val(), 16) / 255);
             inst._change();
           });
@@ -1602,7 +1602,7 @@
           html = function () {
             var html = '';
 
-            inst._eachSwatch(function (name, color) {
+            inst._eachSwatch((name, color)=>{
               var c = new $.colorpicker.Color(color.r, color.g, color.b),
                 css = c.toCSS();
               html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name} (${css})"></div>`;
@@ -2420,19 +2420,19 @@
 
         // showOn focus
         if (/\bfocus|all|both\b/.test(that.options.showOn)) {
-          that.element.on('focus', function () {
+          that.element.on('focus', ()=>{
             that.open();
           });
         }
         if (/\bfocus|all|both\b/.test(that.options.hideOn)) {
-          that.element.on('focusout', function (e) {
+          that.element.on('focusout', (e)=>{
             that.close();
           });
         }
 
         // showOn click
         if (/\bclick|all|both\b/.test(that.options.showOn)) {
-          that.element.on('click', function (e) {
+          that.element.on('click', (e)=>{
             if (that.opened && /\bclick|all|both\b/.test(that.options.hideOn)) {
               that.close();
             } else {
@@ -2477,7 +2477,7 @@
 
         // showOn alt
         if (/\balt|all|both\b/.test(that.options.showOn)) {
-          $(that.options.altField).on('click', function () {
+          $(that.options.altField).on('click', ()=>{
             if (that.opened && /\balt|all|both\b/.test(that.options.hideOn)) {
               that.close();
             } else {
@@ -2528,7 +2528,7 @@
       this.dialog && this.dialog.removeClass('ui-colorpicker-disabled');
       this.options.disabled = false;
 
-      this.parts && $.each(this.parts, function (index, part) {
+      this.parts && $.each(this.parts, (index, part)=>{
         part.disable && part.disable(false);
       });
     },
@@ -2540,7 +2540,7 @@
       this.dialog && this.dialog.addClass('ui-colorpicker-disabled');
       this.options.disabled = true;
 
-      this.parts && $.each(this.parts, function (index, part) {
+      this.parts && $.each(this.parts, (index, part)=>{
         part.disable && part.disable(true);
       });
     },
@@ -2612,7 +2612,7 @@
 
       // Close on clicking outside window and controls
       if (that.events.document_click_html === null) {
-        $(document).on('touchstart click', 'html', that.events.document_click_html = function (event) {
+        $(document).on('touchstart click', 'html', that.events.document_click_html = (event)=>{
           if (!that.opened || event.target === that.element[0] || that.overlay) {
             return;
           }
@@ -2628,7 +2628,7 @@
             parents = $(event.target).parents();
           // add the event.target in case of buttonImageOnly and closeOnOutside both are set to true
           parents.push(event.target);
-          for (p = 0; p <= parents.length; ++p) {
+          for (let p in new Uint8Array(parents.length)) {
             // button
             if (that.button !== null && parents[p] === that.button[0]) {
               return;
@@ -2655,7 +2655,7 @@
       }
 
       if (that.events.document_keydown === null) {
-        $(document).on('keydown', that.events.document_keydown = function (event) {
+        $(document).on('keydown', that.events.document_keydown = (event)=>{
           // close on ESC key
           if (that.opened && event.keyCode === 27 && that.options.closeOnEscape) {
             that.close(that.options.revert);
@@ -2669,11 +2669,11 @@
       }
 
       // Close (with OK) on tab key in element
-      that.element.keydown(function (event) {
+      that.element.keydown((event)=>{
         if (event.keyCode === 9) {
           that.close();
         }
-      }).keyup(function (event) {
+      }).keyup((event)=>{
         var color = that._parseColor(that.element.val());
         if (color && !that.color.equals(color)) {
           that.color = color;
@@ -2709,7 +2709,7 @@
 
       // Add any parts to the internal parts list
       that.parts = {};
-      $.each(parts_list, function(index, part) {
+      $.each(parts_list, (index, part)=>{
         if ($.colorpicker.parts[part]) {
           that.parts[part] = new $.colorpicker.parts[part](that);
         }
@@ -2718,7 +2718,7 @@
       if (!that.generated) {
         layout_parts = [];
 
-        $.each(that.options.layout, function(part, pos) {
+        $.each(that.options.layout, (part, pos)=>{
           if (that.parts[part]) {
             layout_parts.push({
               'part': part,
@@ -2727,7 +2727,7 @@
           }
         });
 
-        table = $(_layoutTable(layout_parts, function(cell, x, y) {
+        table = $(_layoutTable(layout_parts, (cell, x, y)=>{
           classes = [`ui-colorpicker-${cell.part}-container`];
 
           if (x > 0) {
@@ -2863,7 +2863,7 @@
 
         // Without waiting for domready the width of the map is 0 and we
         // wind up with the cursor stuck in the upper left corner
-        $(function() {
+        $(()=>{
           that._repaintAllParts();
         });
       }
@@ -2892,7 +2892,7 @@
       }
 
       // tear down the interface
-      that._effectHide(that.dialog, function () {
+      that._effectHide(that.dialog, ()=>{
         that.dialog.remove();
         that.dialog		= null;
         that.generated	= false;
@@ -2969,7 +2969,7 @@
     },
 
     _initAllParts: function () {
-      $.each(this.parts, function (index, part) {
+      $.each(this.parts, (index, part)=>{
         if (part.init) {
           part.init();
         }
@@ -2977,7 +2977,7 @@
     },
 
     _updateAllParts: function () {
-      $.each(this.parts, function (index, part) {
+      $.each(this.parts, (index, part)=>{
         if (part.update) {
           part.update();
         }
@@ -2985,7 +2985,7 @@
     },
 
     _repaintAllParts: function () {
-      $.each(this.parts, function (index, part) {
+      $.each(this.parts, (index, part)=>{
         if (part.repaint) {
           part.repaint();
         }
@@ -3034,18 +3034,18 @@
 
     // This will be deprecated by jQueryUI 1.9 widget
     _hoverable: function (e) {
-      e.hover(function () {
+      e.hover(()=>{
         e.addClass('ui-state-hover');
-      }, function () {
+      }, ()=>{
         e.removeClass('ui-state-hover');
       });
     },
 
     // This will be deprecated by jQueryUI 1.9 widget
-    _focusable: function (e) {
-      e.focus(function () {
+    _focusable: (e)=>{
+      e.focus(()=>{
         e.addClass('ui-state-focus');
-      }).blur(function () {
+      }).blur(()=>{
         e.removeClass('ui-state-focus');
       });
     },
@@ -3070,7 +3070,7 @@
     _eachSwatch: function (callback) {
       var currentSwatches = this._getSwatches(),
         name;
-      $.each(currentSwatches, function (nameOrIndex, swatch) {
+      $.each(currentSwatches, (nameOrIndex, swatch)=>{
         name = $.isArray(currentSwatches) ? swatch.name : nameOrIndex;
         return callback(name, swatch);
       });
@@ -3079,7 +3079,7 @@
     _getSwatch: function(name) {
       var swatch = false;
 
-      this._eachSwatch(function(swatchName, current) {
+      this._eachSwatch((swatchName, current)=>{
         if (swatchName.toLowerCase() == name.toLowerCase()) {
           swatch = current;
           return false;
@@ -3092,16 +3092,16 @@
     _parseFormat: function(format, text) {
       var that = this,
         typeRegexps = {
-          x:  function() {return '([0-9a-fA-F]{2})';}
-          , d:  function() {return '([12]?[0-9]{1,2})';}
-          , f:  function() {return '([0-9]*\\.?[0-9]*)';}
-          , p:  function() {return '([0-9]*\\.?[0-9]*)';}
+          x:  ()=>{return '([0-9a-fA-F]{2})';}
+          , d:  ()=>{return '([12]?[0-9]{1,2})';}
+          , f:  ()=>{return '([0-9]*\\.?[0-9]*)';}
+          , p:  ()=>{return '([0-9]*\\.?[0-9]*)';}
         },
         typeConverters = {
-          x:  function(v) {return parseInt(v, 16) / 255.;}
-          , d:  function(v) {return v / 255.;}
-          , f:  function(v) {return v;}
-          , p:  function(v) {return v * 0.01;}
+          x:  (v)=>{return parseInt(v, 16) / 255.;}
+          , d:  (v)=>{return v / 255.;}
+          , f:  (v)=>{return v;}
+          , p:  (v)=>{return v * 0.01;}
         },
         setters = {
           r:  'setRGB'
@@ -3131,12 +3131,12 @@
         pattern;
 
       // Construct pattern
-      pattern = format.replace(/[()\\^$.|?*+[\]]/g, function(m) {
+      pattern = format.replace(/[()\\^$.|?*+[\]]/g, (m)=>{
         return '\\'+m;
       });
 
 
-      pattern = pattern.replace(/\\?[argbhsvcmykLAB][xdfp]/g, function(variable) {
+      pattern = pattern.replace(/\\?[argbhsvcmykLAB][xdfp]/g, (variable)=>{
         if (variable.match(/^\\/)) {
           return variable.slice(1);
         }
@@ -3161,7 +3161,7 @@
 
           values.shift();
 
-          $.each(setterChannels[setter], function(index, channel) {
+          $.each(setterChannels[setter], (index, channel)=>{
             channelIndex = $.inArray(channel, channels);
             args[index] = converters[channelIndex](values[channelIndex]);
           });
@@ -3182,7 +3182,7 @@
         ? that.options.colorFormat
         : [ that.options.colorFormat ];
 
-      $.each(formats, function(index, format) {
+      $.each(formats, (index, format)=>{
         if ($.colorpicker.parsers[format]) {
           color = $.colorpicker.parsers[format](text, that);
         } else {
@@ -3196,7 +3196,7 @@
 
       if (!color) {
         // fallback; check all registered parsers
-        $.each($.colorpicker.parsers, function(name, parser) {
+        $.each($.colorpicker.parsers, (name, parser)=>{
           color = parser(text, that);
           if (color) {
             return false;
@@ -3214,7 +3214,7 @@
     _exactName: function(color) {
       var name = false;
 
-      this._eachSwatch(function(n, swatch) {
+      this._eachSwatch((n, swatch)=>{
         if (color.equals(new $.colorpicker.Color(swatch.r, swatch.g, swatch.b))) {
           name = n;
           return false;
@@ -3230,7 +3230,7 @@
         name    = false,
         d;
 
-      this._eachSwatch(function(n, swatch) {
+      this._eachSwatch((n, swatch)=>{
         d = color.distance(new $.colorpicker.Color(swatch.r, swatch.g, swatch.b));
         if (d < distance || distance === null) {
           name = n;
@@ -3247,10 +3247,10 @@
     _formatColor: function (formats, color) {
       var that = this,
         text = null,
-        types = { 'x':  function(v) {return _intToHex(v * 255);}
-          ,'d':function(v) {return Math.round(v * 255);}
-          ,'f':function(v) {return v;}
-          ,'p':function(v) {return v * 100.;}
+        types = { 'x':  (v)=>{return _intToHex(v * 255);}
+          ,'d':(v)=>{return Math.round(v * 255);}
+          ,'f':(v)=>{return v;}
+          ,'p':(v)=>{return v * 100.;}
         },
         channels  = color.getChannels();
 
@@ -3258,12 +3258,12 @@
         formats = [formats];
       }
 
-      $.each(formats, function(index, format) {
+      $.each(formats, (index, format)=>{
         if ($.colorpicker.writers[format]) {
           text = $.colorpicker.writers[format](color, that);
           return (text === false);
         } else {
-          text = format.replace(/\\?[argbhsvcmykLAB][xdfp]/g, function(m) {
+          text = format.replace(/\\?[argbhsvcmykLAB][xdfp]/g, (m)=>{
             if (m.match(/^\\/)) {
               return m.slice(1);
             }

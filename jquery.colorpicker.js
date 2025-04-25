@@ -1605,7 +1605,7 @@
             inst._eachSwatch(function (name, color) {
               var c = new $.colorpicker.Color(color.r, color.g, color.b),
                 css = c.toCSS();
-              html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name}"></div>`;
+              html += `<div class="ui-colorpicker-swatch" style="background-color:${css}" title="${name} (${css})"></div>`;
             });
 
             return `<div class="ui-colorpicker-swatches ui-colorpicker-border" style="width:${inst.options.swatchesWidth}px">${html}</div>`;

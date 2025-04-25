@@ -1685,10 +1685,10 @@
                 case 0:
                   inst.color.setAlpha(100);
                   inst._change();
+                  break;
                 default:
                   inst.color.setAlpha(0);
                   inst._change();
-                break;
             }
           });
         };
